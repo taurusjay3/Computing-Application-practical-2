@@ -1,0 +1,97 @@
+# Initialize an empty dictionary to store account information
+accounts = {}
+
+# Method to create an account
+def create_account(account_number, account_holder, initial_balance):
+    if account_number not in accounts:
+        accounts[account_number] = {
+            'holder': account_holder,
+            'balance': initial_balance
+        }
+        print("Account created successfully.")
+    else:
+        print("Account with this number already exists.")
+
+# Method to access account information
+def access_account_info(account_number):
+    if account_number in accounts:
+        account_info = accounts[account_number]
+        print(f"Account Number: {account_number}")
+        print(f"Account Holder: {account_info['holder']}")
+        print(f"Account Balance: {account_info['balance']}")
+    else:
+        print("Account does not exist.")
+
+# Method to deposit money
+def deposit_money(account_number, amount):
+    if account_number in accounts:
+        accounts[account_number]['balance'] += amount
+        print("Money deposited successfully.")
+    else:
+        print("Account does not exist.")
+
+# Method to withdraw money
+def withdraw_money(account_number, amount):
+    if account_number in accounts:
+        if accounts[account_number]['balance'] >= amount:
+            accounts[account_number]['balance'] -= amount
+            print("Money withdrawn successfully.")
+        else:
+            print("Insufficient funds.")
+    else:
+        print("Account does not exist.")
+
+# Method to delete an account
+def delete_account(account_number):
+    if account_number in accounts:
+        del accounts[account_number]
+        print("Account deleted successfully.")
+    else:
+        print("Account does not exist.")
+
+# Method to view all accounts
+def view_all_accounts():
+    for account_number, account_info in accounts.items():
+        print(f"Account Number: {account_number}")
+        print(f"Account Holder: {account_info['holder']}")
+        print(f"Account Balance: {account_info['balance']}")
+        print("-------------------------")
+
+# Main menu
+while True:
+    print("ABSA Bank - Your Financial Journey Begins")
+    print("1. Create Account")
+    print("2. Access Account Information")
+    print("3. Deposit Money")
+    print("4. Withdraw Money")
+    print("5. Delete Account")
+    print("6. View All Accounts")
+    print("7. Exit")
+    choice = int(input("Enter your choice: "))
+
+    if choice == 1:
+        account_number = input("Enter Account Number: ")
+        account_holder = input("Enter Account Holder's Name: ")
+        initial_balance = float(input("Enter Initial Balance: "))
+        create_account(account_number, account_holder, initial_balance)
+    elif choice == 2:
+        account_number = input("Enter Account Number: ")
+        access_account_info(account_number)
+    elif choice == 3:
+        account_number = input("Enter Account Number: ")
+        amount = float(input("Enter Amount to Deposit: "))
+        deposit_money(account_number, amount)
+    elif choice == 4:
+        account_number = input("Enter Account Number: ")
+        amount = float(input("Enter Amount to Withdraw: "))
+        withdraw_money(account_number, amount)
+    elif choice == 5:
+        account_number = input("Enter Account Number to Delete: ")
+        delete_account(account_number)
+    elif choice == 6:
+        view_all_accounts()
+    elif choice == 7:
+        print("Thank you for using ABSA Bank. Goodbye!")
+        break
+    else:
+        print("Invalid choice. Please select a valid option.")
